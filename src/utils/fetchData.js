@@ -5,6 +5,7 @@ export const rapidExercisesOptions = {
     'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
   },
 };
+
 export const fetchExercises = async (searchTerm) => {
   const url = 'https://exercisedb.p.rapidapi.com/exercises';
 
@@ -19,6 +20,32 @@ export const fetchExercises = async (searchTerm) => {
         exercise?.equipment.toLowerCase().includes(searchTerm)
     );
     return filteredData;
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+export const fetchExercisesByBodyPart = async (bodyPart) => {
+  const url =
+    bodyPart === 'all'
+      ? `https://exercisedb.p.rapidapi.com/exercises`
+      : `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`;
+
+  try {
+    const response = await fetch(url, rapidExercisesOptions);
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+export const fetchExerciseById = async (Id) => {
+  const url = `https://exercisedb.p.rapidapi.com/exercises/exercise/${Id}`;
+
+  try {
+    const response = await fetch(url, rapidExercisesOptions);
+    const data = await response.json();
+    return data;
   } catch (e) {
     console.log(e.message);
   }

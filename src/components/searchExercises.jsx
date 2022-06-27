@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Box, Stack, TextField, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import SearchIcon from '@mui/icons-material/Search';
@@ -8,16 +8,31 @@ import BodyPartsList from './bodyPartsList';
 const SearchExercises = () => {
   const [search, setSearch] = useState('');
   const [searchLoading, setSearchLoading] = useState(false);
-  const { exercises, setExercises } = useContext(ExercisesContext);
-  const handleSearch = async (e) => {
+  const { exercises, setFilteredExercises, filteredExercises } =
+    useContext(ExercisesContext);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchLoading(true);
     if (search) {
-      e.preventDefault();
-      setSearchLoading(true);
-      setExercises(await fetchExercises(search));
+      const filteredData = exercises.filter(
+        (exercise) =>
+          exercise?.name.toLowerCase().includes(search) ||
+          exercise?.target.toLowerCase().includes(search) ||
+          exercise?.bodyPart.toLowerCase().includes(search) ||
+          exercise?.equipment.toLowerCase().includes(search)
+      );
+      setFilteredExercises(filteredData);
       setSearch('');
-      setSearchLoading(false);
+      if (filteredData.length) window.scrollTo({ top: 1200 });
+    } else {
+      setFilteredExercises(exercises);
     }
+
+    setSearchLoading(false);
   };
+  useEffect(() => {
+    setFilteredExercises(exercises);
+  }, [exercises]);
   return (
     <Stack mt="20px" alignItems={'center'} justifyContent={'center'}>
       <Typography

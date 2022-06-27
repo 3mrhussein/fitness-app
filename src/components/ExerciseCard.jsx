@@ -5,7 +5,7 @@ const ExerciseCard = ({ exercise }) => {
   return (
     <Link to={`/exercise/${exercise.id}`} className="exercise-card">
       <img src={exercise.gifUrl} alt="gif-exercise" loading="lazy" />
-      <Stack gap={2} direction="row" mx="30px">
+      <Stack gap={2} direction="row" m="10px 10px 0 10px">
         <Button
           p="0"
           variant="contained"
@@ -41,7 +41,13 @@ const ExerciseCard = ({ exercise }) => {
           {exercise.target}
         </Button>
       </Stack>
-      <Typography color="black" fontWeight="500" fontSize="12px" p="10px">
+      <Typography
+        color="black"
+        fontWeight="600"
+        textTransform={'capitalize'}
+        fontSize="12px"
+        p="10px"
+      >
         {exercise.name}
       </Typography>
     </Link>
