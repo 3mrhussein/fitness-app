@@ -5,16 +5,18 @@ import SearchExercises from '../../components/searchExercises';
 import { ExercisesContextProvider } from '../../context/exercisesContextAPI';
 import BodyPartsList from '../../components/bodyPartsList';
 import { BodyListContextProvider } from '../../context/bodyListContextApi';
+import Exercises from '../../components/Exercises';
 export const Home = () => {
   return (
     <Box>
       <HeroBanner />
       <ExercisesContextProvider>
-        <SearchExercises />
+        <BodyListContextProvider>
+          <SearchExercises />
+          <BodyPartsList />
+          <Exercises />
+        </BodyListContextProvider>
       </ExercisesContextProvider>
-      <BodyListContextProvider>
-        <BodyPartsList />
-      </BodyListContextProvider>
     </Box>
   );
 };

@@ -13,7 +13,7 @@ const SearchExercises = () => {
     if (search) {
       e.preventDefault();
       setSearchLoading(true);
-      setExercises(fetchExercises(search));
+      setExercises(await fetchExercises(search));
       setSearch('');
       setSearchLoading(false);
     }
@@ -45,6 +45,7 @@ const SearchExercises = () => {
           type="text"
           sx={{
             input: {
+              p: 1,
               fontWeight: 700,
               border: 'none',
             },
@@ -68,7 +69,7 @@ const SearchExercises = () => {
             textTransform: 'none',
             width: { lg: '175px', xs: '100px' },
             fontSize: { lg: '20px', xs: '14px' },
-            height: '56px',
+            height: '39px',
           }}
         >
           Search

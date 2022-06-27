@@ -12,6 +12,9 @@ body {
 ::-webkit-scrollbar {
   width: 0px;
 }
+.css-lqq3n7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+  background-color: #ff2625 !important;
+}
 
 .right-arrow,
 .left-arrow {
@@ -57,9 +60,9 @@ body {
 }
 
 .exercise-card {
-  width: 400px;
-  height: 445px;
-  background: #fff;
+  height: 330px;
+  width: 300px;
+  background-color: white;
   border-top: 4px solid #ff2625;
   border-bottom-left-radius: 20px;
   text-decoration: none;
@@ -72,7 +75,7 @@ body {
 }
 
 .exercise-card img {
-  height: 326px;
+  height: 250px;
 }
 
 .bodyPart-card {
@@ -127,7 +130,7 @@ body {
   }
 
   .exercise-card {
-    width: 320px;
+    width: 250px;
   }
 
   .exercise-video {
