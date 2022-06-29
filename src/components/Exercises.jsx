@@ -44,7 +44,7 @@ const Exercises = () => {
   }, [currentExercise]);
   return (
     <Box px="20px" mt="50px">
-      <Typography fontSize="38px" fontWeight={'500'}>
+      <Typography fontSize="36px" fontWeight={'500'}>
         Showing Results
       </Typography>
       <Box direction="row" m="50px auto 50px auto">

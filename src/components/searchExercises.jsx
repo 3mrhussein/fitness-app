@@ -66,7 +66,6 @@ const SearchExercises = () => {
             },
             width: {
               lg: '800px',
-              xs: '300px',
             },
             backgroundColor: '#FFFFFF',
           }}
@@ -82,7 +81,7 @@ const SearchExercises = () => {
             backgroundColor: '#FF2625',
             color: '#FFF',
             textTransform: 'none',
-            width: { lg: '175px', xs: '100px' },
+            width: { lg: '175px' },
             fontSize: { lg: '20px', xs: '14px' },
             height: '39px',
           }}
