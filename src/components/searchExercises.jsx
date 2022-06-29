@@ -13,7 +13,7 @@ const SearchExercises = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchLoading(true);
-    if (search) {
+    if (search && exercises) {
       const filteredData = exercises.filter(
         (exercise) =>
           exercise?.name.toLowerCase().includes(search) ||

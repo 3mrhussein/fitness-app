@@ -3,7 +3,11 @@ import { Box, Stack, Pagination, Typography } from '@mui/material';
 import { ExercisesContext } from '../context/exercisesContextAPI';
 import ExerciseCard from './ExerciseCard';
 import { BodyListContext } from '../context/bodyListContextApi';
-import { fetchExercisesByBodyPart } from '../utils/fetchData';
+import {
+  exercisesUrl,
+  fetchExercisesByBodyPart,
+  rapidExercisesOptions,
+} from '../utils/fetchData';
 const Exercises = () => {
   const { exercises, setExercises, filteredExercises } =
     useContext(ExercisesContext);
@@ -13,11 +17,27 @@ const Exercises = () => {
   const handlePageChange = (e, value) => {
     setPage(value);
   };
-  let subExercises = filteredExercises.slice(page - 1, page + 5);
+  let subExercises = null;
+  if (filteredExercises) {
+    subExercises = filteredExercises.slice(page - 1, page + 5);
+  }
 
   useEffect(() => {
     const fetchByBodyParts = async () => {
-      setExercises(await fetchExercisesByBodyPart(currentExercise));
+      const url =
+        currentExercise === 'all'
+          ? exercisesUrl
+          : `${exercisesUrl}/bodyPart/${currentExercise}`;
+
+      try {
+        const response = await fetch(url, rapidExercisesOptions);
+        if (response.ok) {
+          const data = await response.json();
+          setExercises(data);
+        } else setExercises(null);
+      } catch (e) {
+        console.log(e.message);
+      }
     };
 
     fetchByBodyParts();
@@ -28,9 +48,9 @@ const Exercises = () => {
         Showing Results
       </Typography>
       <Box direction="row" m="50px auto 50px auto">
-        {filteredExercises.length > 6 && (
+        {filteredExercises && (
           <Pagination
-            count={Math.ceil(exercises.length / 10)}
+            count={Math.ceil(filteredExercises.length / 6)}
             variant="outlined"
             page={page}
             onChange={handlePageChange}
@@ -52,9 +72,10 @@ const Exercises = () => {
         justifyContent="center"
         alignItems={'center'}
       >
-        {subExercises.map((exercise) => (
-          <ExerciseCard key={exercise.id} exercise={exercise} />
-        ))}
+        {subExercises &&
+          subExercises.map((exercise) => (
+            <ExerciseCard key={exercise.id} exercise={exercise} />
+          ))}
       </Stack>
     </Box>
   );

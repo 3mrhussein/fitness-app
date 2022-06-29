@@ -1,73 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import { Stack, Box, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { fetchExerciseById } from '../../utils/fetchData';
+import {
+  exercisesUrl,
+  fetchExerciseById,
+  rapidExercisesOptions,
+} from '../../utils/fetchData';
+import Detail from '../../components/Detail';
+import YoutubeVideos from '../../components/YoutubeVideos';
+import SimilarExercise from '../../components/SimilarExercise';
+import { TailSpin } from 'react-loader-spinner';
 const ExerciseDetail = () => {
   const [exerciseDetail, setExerciseDetail] = useState(null);
   const { id } = useParams();
   useEffect(() => {
-    const fetchExercise = async () => {
-      setExerciseDetail(await fetchExerciseById(id));
+    const fetchExercise = async (Id) => {
+      const url = `${exercisesUrl}/exercise/${Id}`;
+      try {
+        const response = await fetch(url, rapidExercisesOptions);
+        if (response.ok) {
+          const data = await response.json();
+          setExerciseDetail(data);
+        } else {
+          setExerciseDetail(null);
+        }
+      } catch (e) {
+        console.log(e.message);
+      }
     };
     fetchExercise();
   }, [id]);
-  console.log(exerciseDetail, id);
-  const { target, name } = exerciseDetail;
-  return (
+
+  return exerciseDetail ? (
+    <Stack p="20px" gap="40px">
+      <Detail ExerciseDetail={exerciseDetail} />
+      <YoutubeVideos Exercise={exerciseDetail} />
+      <SimilarExercise
+        Target={exerciseDetail?.target}
+        Equipment={exerciseDetail?.equipment}
+      />
+    </Stack>
+  ) : (
     <Stack
-      my={'70px'}
-      p="20px"
-      flexWrap={'wrap'}
-      direction="row"
-      gap={2}
-      justifyContent="center"
+      width="100%"
+      height="600px"
+      justifyContent={'center'}
+      alignItems="center"
     >
-      <Box
-        sx={{
-          minWidth: '350px',
-          bgcolor: 'white',
-          // height: '500px',
-          height: { md: '500px', xs: '400px' },
-          // width: { md: '450px', xs: '400px' },
-        }}
-      >
-        <img
-          loading="lazy"
-          src={exerciseDetail?.gifUrl}
-          alt="exercise-gif"
-          style={{ width: '100%', height: '100%' }}
-        />
-      </Box>
-      <Stack
-        sx={{
-          px: '20px',
-          width: { sm: '800px', md: '400px' },
-          // height: { md: '500px', xs: '450px' },
-          // width: { md: '450px', xs: '400px' },
-        }}
-        gap={3}
-      >
-        <Typography
-          // sx={{ wordWrap: 'break-word' }}
-          textTransform={'capitalize'}
-          // fontSize="36px"
-          // fontWeight={'bold'}
-          variant="h3"
-        >
-          {name}
-        </Typography>
-        <Typography
-          // sx={{ wordWrap: 'break-word' }} fontSize="14px"
-          variant="h6"
-        >
-          Exercise keep you strong.
-          {name} {` `}bup is one of the best <br /> exercises to target your
-          {target}. it will help you improve your mood and gain energy
-        </Typography>
-        <Stack direction={'row'}></Stack>
-        <Stack direction={'row'}></Stack>
-        <Stack direction={'row'}></Stack>
-      </Stack>
+      <TailSpin color="#ff2625" height={80} width={80} />
     </Stack>
   );
 };
