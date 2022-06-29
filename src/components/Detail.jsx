@@ -5,7 +5,6 @@ import EquipmentIcon from '../assets/icons/equipment.png';
 import TargetIcon from '../assets/icons/target.png';
 const Detail = ({ ExerciseDetail }) => {
   const { bodyPart, target, equipment, name, gifUrl } = ExerciseDetail;
-  console.log('Details is rendered');
   const extraDetail = [
     {
       name: bodyPart,
@@ -57,8 +56,8 @@ const Detail = ({ ExerciseDetail }) => {
               sx={{
                 background: '#fff2db',
                 borderRadius: '50%',
-                width: '70px',
-                height: '70px',
+                width: '60px',
+                height: '60px',
               }}
             >
               <img src={item.icon} alt="body-part-icon" />

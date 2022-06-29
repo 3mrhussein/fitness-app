@@ -11,7 +11,7 @@ const ExerciseDetail = () => {
   const { id } = useParams();
   useEffect(() => {
     const fetchExercise = async () => {
-      console.log(id);
+      window.scrollTo({ top: '0px' });
       const url = `${exercisesUrl}/exercise/${id}`;
       try {
         const response = await fetch(url, rapidExercisesOptions);
