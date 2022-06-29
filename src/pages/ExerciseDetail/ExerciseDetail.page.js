@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Stack, Box, Typography } from '@mui/material';
+import { Stack } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import {
-  exercisesUrl,
-  fetchExerciseById,
-  rapidExercisesOptions,
-} from '../../utils/fetchData';
+import { exercisesUrl, rapidExercisesOptions } from '../../utils/fetchData';
 import Detail from '../../components/Detail';
 import YoutubeVideos from '../../components/YoutubeVideos';
 import SimilarExercise from '../../components/SimilarExercise';
@@ -14,10 +10,12 @@ const ExerciseDetail = () => {
   const [exerciseDetail, setExerciseDetail] = useState(null);
   const { id } = useParams();
   useEffect(() => {
-    const fetchExercise = async (Id) => {
-      const url = `${exercisesUrl}/exercise/${Id}`;
+    const fetchExercise = async () => {
+      console.log(id);
+      const url = `${exercisesUrl}/exercise/${id}`;
       try {
         const response = await fetch(url, rapidExercisesOptions);
+        console.log('Fetched Exercise Detail', response);
         if (response.ok) {
           const data = await response.json();
           setExerciseDetail(data);
@@ -32,7 +30,7 @@ const ExerciseDetail = () => {
   }, [id]);
 
   return exerciseDetail ? (
-    <Stack p="20px" gap="40px">
+    <Stack direction={'column'} p="20px" gap="110px">
       <Detail ExerciseDetail={exerciseDetail} />
       <YoutubeVideos Exercise={exerciseDetail} />
       <SimilarExercise

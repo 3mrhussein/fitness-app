@@ -9,12 +9,12 @@ import { VideoCard } from './VideoCard';
 
 const YoutubeVideos = ({ Exercise }) => {
   const [videos, setVideos] = useState(null);
-
   useEffect(() => {
     const fetchYoutubeVideos = async () => {
       const url = `${rapidYoutubeSearchAndDownloadUrl}/search?query=${Exercise?.name}`;
       try {
         const response = await fetch(url, rapidYoutubeSearchAndDownloadOptions);
+        console.log('YoutubeVideo Data Fetched');
         if (response.ok) {
           const data = await response.json();
           setVideos(data);
@@ -33,7 +33,7 @@ const YoutubeVideos = ({ Exercise }) => {
       <Typography variant="h5" fontWeight="bold">
         Watch{' '}
         <span style={{ color: 'red', textTransform: 'capitalize' }}>
-          {Exercise}
+          {Exercise.name}
         </span>{' '}
         exercise videos
       </Typography>

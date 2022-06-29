@@ -18,6 +18,7 @@ const BodyPartsList = () => {
         const response = await fetch(url, rapidExercisesOptions);
         const data = await response.json();
         setBodyList(['all', ...data]);
+        console.log('body Part Data Fetched');
       } catch (e) {
         console.log(e.message);
       }

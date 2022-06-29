@@ -40,6 +40,7 @@ const SimilarExercise = ({ Target, Equipment }) => {
         console.log(e.message);
       }
     };
+    console.log('Smilir exercises Data Fetched');
     fetchSimilarExercises();
     fetchSimilarEquipment();
   }, []);

@@ -9,8 +9,7 @@ import {
   rapidExercisesOptions,
 } from '../utils/fetchData';
 const Exercises = () => {
-  const { exercises, setExercises, filteredExercises } =
-    useContext(ExercisesContext);
+  const { setExercises, filteredExercises } = useContext(ExercisesContext);
   const { currentExercise } = useContext(BodyListContext);
   const [page, setPage] = useState(1);
 
@@ -31,6 +30,7 @@ const Exercises = () => {
 
       try {
         const response = await fetch(url, rapidExercisesOptions);
+        console.log('Exercises Data Fetched');
         if (response.ok) {
           const data = await response.json();
           setExercises(data);
@@ -44,25 +44,10 @@ const Exercises = () => {
   }, [currentExercise]);
   return (
     <Box px="20px" mt="50px">
+      {console.log('Exercises Rendered')};
       <Typography fontSize="36px" fontWeight={'500'}>
         Showing Results
       </Typography>
-      <Box direction="row" m="50px auto 50px auto">
-        {filteredExercises && (
-          <Pagination
-            count={Math.ceil(filteredExercises.length / 6)}
-            variant="outlined"
-            page={page}
-            onChange={handlePageChange}
-            sx={{
-              ul: {
-                justifyContent: 'center',
-                alignItems: 'center',
-              },
-            }}
-          />
-        )}
-      </Box>
       <Stack
         mt={'30px'}
         gap={6}
@@ -77,6 +62,24 @@ const Exercises = () => {
             <ExerciseCard key={exercise.id} exercise={exercise} />
           ))}
       </Stack>
+      <Box direction="row" m="50px auto 50px auto">
+        {filteredExercises && (
+          <Pagination
+            count={Math.ceil(filteredExercises.length / 6)}
+            variant="outlined"
+            page={page}
+            onChange={handlePageChange}
+            sx={{
+              ul: {
+                width: '100%',
+                flexWrap: 'nowrap',
+                justifyContent: 'center',
+                alignItems: 'center',
+              },
+            }}
+          />
+        )}
+      </Box>
     </Box>
   );
 };

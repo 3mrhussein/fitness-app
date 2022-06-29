@@ -103,10 +103,10 @@ body {
   text-decoration: none;
 }
 .left-arrow {
-  left: 40%;
+  right: 20%;
 }
 .right-arrow {
-  right: 40%;
+  right: 10%;
   /* position: static !important; */
 }
 
@@ -141,6 +141,6 @@ body {
 
 @media screen and (max-width: 400px) {
   .exercise-card {
-    width: 280px;
+    width: 100%;
   }
 }

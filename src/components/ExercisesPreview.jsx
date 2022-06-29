@@ -5,7 +5,6 @@ import LeftArrowIcon from '../assets/icons/left-arrow.png';
 import RightArrowIcon from '../assets/icons/right-arrow.png';
 import ExerciseCard from './ExerciseCard';
 const ExercisesPreview = ({ exercises }) => {
-  console.log(exercises);
   const ArrowLeft = () => {
     const { scrollPrev } = useContext(VisibilityContext);
     return (
@@ -39,7 +38,7 @@ const ExercisesPreview = ({ exercises }) => {
           exercises.map((item) => {
             return (
               <Box key={item.id} mx="20px">
-                <ExerciseCard exercise={item} />;
+                <ExerciseCard exercise={item} />
               </Box>
             );
           })}

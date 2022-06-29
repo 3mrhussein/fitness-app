@@ -5,6 +5,7 @@ import EquipmentIcon from '../assets/icons/equipment.png';
 import TargetIcon from '../assets/icons/target.png';
 const Detail = ({ ExerciseDetail }) => {
   const { bodyPart, target, equipment, name, gifUrl } = ExerciseDetail;
+  console.log('Details is rendered');
   const extraDetail = [
     {
       name: bodyPart,
@@ -35,8 +36,8 @@ const Detail = ({ ExerciseDetail }) => {
         sx={{
           bgcolor: 'white',
           height: 'fit-content',
+          minWidth: { md: '450px' },
         }}
-        minWidth="450px"
         mx="auto"
       >
         <img width="100%" loading="lazy" src={gifUrl} alt="exercise-gif" />

@@ -3,7 +3,6 @@ import { Typography, Box, Stack, Link } from '@mui/material';
 export const VideoCard = ({ Video }) => {
   const { title, channelName, thumbnails, videoId } = Video;
 
-  console.log(Video);
   return (
     <Stack gap={'10px'} width="250px">
       <Box
